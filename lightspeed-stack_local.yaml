@@ -14,3 +14,8 @@ user_data_collection:
   transcripts_disabled: true
 customization:
   system_prompt_path: ./ansible-chatbot-system-prompt.txt
+# system_prompt_path: ./ai-installer-system-prompt.txt
+mcp_servers:
+  - name: mcp::my_mcp_server
+    provider_id: model-context-protocol
+    url: http://127.0.0.1:20000/sse

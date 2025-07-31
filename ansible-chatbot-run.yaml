@@ -11,13 +11,10 @@ apis:
 - tool_runtime
 providers:
   inference:
-  - provider_id: my_rhoai_dev
-    provider_type: remote::vllm
+  - provider_id: gemini
+    provider_type: remote::gemini
     config:
-      url: ${env.VLLM_URL}
-      max_tokens: ${env.VLLM_MAX_TOKENS:=4096}
-      api_token: ${env.VLLM_API_TOKEN:=fake}
-      tls_verify: ${env.VLLM_TLS_VERIFY:=true}
+      api_key: ${env.VLLM_API_TOKEN:=fake}
   - provider_id: inline_sentence-transformer
     provider_type: inline::sentence-transformers
     config: {}
@@ -47,7 +44,7 @@ providers:
         namespace: null
         db_path: ${env.PROVIDERS_DB_DIR:=/.llama/data/distributions/ansible-chatbot}/responses_store.db
       tools_filter:
-        enabled: true
+        enabled: false
         model_id: ${env.INFERENCE_MODEL_FILTER:=}
   datasetio:
   - provider_id: localfs
@@ -77,8 +74,12 @@ metadata_store:
   db_path: ${env.PROVIDERS_DB_DIR:=/.llama/data/distributions/ansible-chatbot}/registry.db
 models:
 - metadata: {}
-  model_id: ${env.INFERENCE_MODEL}
-  provider_id: my_rhoai_dev
+  model_id: gemini/gemini-2.5-pro
+  provider_id: gemini
+  provider_model_id: null
+- metadata: {}
+  model_id: gemini/gemini-2.5-flash
+  provider_id: gemini
   provider_model_id: null
 - metadata:
     embedding_dimension: 768
@@ -98,6 +99,10 @@ benchmarks: []
 tool_groups:
   - toolgroup_id: builtin::rag
     provider_id: rag-runtime
+  - toolgroup_id: mcp::my_mcp_server
+    provider_id: model-context-protocol
+    mcp_endpoint:
+      uri: http://127.0.0.1:20000/sse
 logging: null
 server:
   port: 8321
