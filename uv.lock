@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 2
 requires-python = ">=3.12"
 resolution-markers = [
     "python_full_version >= '3.13'",
@@ -105,13 +105,17 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "aiosqlite" },
+    { name = "authlib" },
     { name = "faiss-cpu" },
     { name = "fire" },
     { name = "lightspeed-stack-providers" },
+    { name = "litellm" },
+    { name = "llama-stack" },
     { name = "mcp" },
     { name = "numpy" },
     { name = "opentelemetry-api" },
     { name = "opentelemetry-exporter-otlp" },
+    { name = "prometheus-client" },
     { name = "sentence-transformers" },
     { name = "sqlalchemy" },
 ]
@@ -125,13 +129,17 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "aiosqlite", specifier = "~=0.21.0" },
+    { name = "authlib", specifier = ">=1.6.1" },
     { name = "faiss-cpu", specifier = "~=1.11.0" },
     { name = "fire", specifier = "~=0.7.0" },
-    { name = "lightspeed-stack-providers", specifier = "==0.1.13" },
+    { name = "lightspeed-stack-providers", specifier = "~=0.1.10" },
+    { name = "litellm", specifier = "==1.74.2" },
+    { name = "llama-stack", specifier = "==0.2.16" },
     { name = "mcp", specifier = "~=1.9.4" },
     { name = "numpy", specifier = "==2.2.6" },
     { name = "opentelemetry-api", specifier = "~=1.34.1" },
     { name = "opentelemetry-exporter-otlp", specifier = "~=1.34.1" },
+    { name = "prometheus-client", specifier = ">=0.22.1" },
     { name = "sentence-transformers", specifier = ">=5.0.0" },
     { name = "sqlalchemy", specifier = "~=2.0.41" },
 ]
@@ -187,6 +195,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/5a/b0/1367933a8532ee6ff8d63537de4f1177af4bff9f3e829baf7331f595bb24/attrs-25.3.0.tar.gz", hash = "sha256:75d7cefc7fb576747b2c81b4442d4d4a1ce0900973527c011d1030fd3bf4af1b", size = 812032, upload-time = "2025-03-13T11:10:22.779Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/77/06/bb80f5f86020c4551da315d78b3ab75e8228f89f0162f2c3a819e407941a/attrs-25.3.0-py3-none-any.whl", hash = "sha256:427318ce031701fea540783410126f03899a97ffc6f61596ad581ac2e40e3bc3", size = 63815, upload-time = "2025-03-13T11:10:21.14Z" },
+]
+
+[[package]]
+name = "authlib"
+version = "1.6.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "cryptography" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/8e/a1/d8d1c6f8bc922c0b87ae0d933a8ed57be1bef6970894ed79c2852a153cd3/authlib-1.6.1.tar.gz", hash = "sha256:4dffdbb1460ba6ec8c17981a4c67af7d8af131231b5a36a88a1e8c80c111cdfd", size = 159988, upload-time = "2025-07-20T07:38:42.834Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f9/58/cc6a08053f822f98f334d38a27687b69c6655fb05cd74a7a5e70a2aeed95/authlib-1.6.1-py2.py3-none-any.whl", hash = "sha256:e9d2031c34c6309373ab845afc24168fe9e93dc52d252631f52642f21f5ed06e", size = 239299, upload-time = "2025-07-20T07:38:39.259Z" },
 ]
 
 [[package]]
@@ -793,16 +813,38 @@ wheels = [
 
 [[package]]
 name = "lightspeed-stack-providers"
-version = "0.1.13"
+version = "0.1.12"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "httpx" },
     { name = "llama-stack" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/71/d0/5f960d6c8aa13fe78907491abdeb156457226f838abc27d5e76071ca293d/lightspeed_stack_providers-0.1.13.tar.gz", hash = "sha256:173ecd451b42d8dd00b637d635fca636f550394c8b60f39aa377bae720b67ccc", size = 16885, upload-time = "2025-08-07T12:33:10.752Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/85/17/f532b6e1b371417c4f8f5e600542edfa79679b79fa51927371abb888bb0e/lightspeed_stack_providers-0.1.12.tar.gz", hash = "sha256:6f90e97e4a22213b54bfab6b49c297eb716bd63ac116353df392e1e5436ce9b2", size = 16780, upload-time = "2025-07-30T08:51:38.513Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/79/56/5459e0bab5057a52386e4a139bab2abdf3bff2cb7753a58cd1cd584cb1ea/lightspeed_stack_providers-0.1.13-py3-none-any.whl", hash = "sha256:16cdfa4d92c290038f191b49f20b73941100c81e2e969e844b0918dce8153ceb", size = 24722, upload-time = "2025-08-07T12:33:09.682Z" },
+    { url = "https://files.pythonhosted.org/packages/b3/3c/f01580d5085f241e974aa709cdbeb26c1de04712d05da3a85d3721fe6173/lightspeed_stack_providers-0.1.12-py3-none-any.whl", hash = "sha256:d8c5750ec0f2100c93792a2c0b8e24ddda88ee459fe090f1ad8edefd8e57e13e", size = 24616, upload-time = "2025-07-30T08:51:37.57Z" },
+]
+
+[[package]]
+name = "litellm"
+version = "1.74.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "aiohttp" },
+    { name = "click" },
+    { name = "httpx" },
+    { name = "importlib-metadata" },
+    { name = "jinja2" },
+    { name = "jsonschema" },
+    { name = "openai" },
+    { name = "pydantic" },
+    { name = "python-dotenv" },
+    { name = "tiktoken" },
+    { name = "tokenizers" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/38/10/63cdae1b1d581ad1db51153dfd06c4e18394a3ba8de495f73f2d797ece3b/litellm-1.74.2.tar.gz", hash = "sha256:cbacffe93976c60ca674fec0a942c70b900b4ad1c8069395174049a162f255bf", size = 9230641, upload-time = "2025-07-11T03:31:07.925Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2a/f7/67689245f48b9e79bcd2f3a10a3690cb1918fb99fffd5a623ed2496bca66/litellm-1.74.2-py3-none-any.whl", hash = "sha256:29bb555b45128e4cc696e72921a6ec24e97b14e9b69e86eed6f155124ad629b1", size = 8587065, upload-time = "2025-07-11T03:31:05.598Z" },
 ]
 
 [[package]]
@@ -1439,6 +1481,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/b3/92/1ca0c3f09233bd7decf8f7105a1c4e3162fb9142128c74adad0fb361b7eb/pillow-11.2.1-cp313-cp313t-win32.whl", hash = "sha256:e0b55f27f584ed623221cfe995c912c61606be8513bfa0e07d2c674b4516d9dd", size = 2335774, upload-time = "2025-04-12T17:49:04.889Z" },
     { url = "https://files.pythonhosted.org/packages/a5/ac/77525347cb43b83ae905ffe257bbe2cc6fd23acb9796639a1f56aa59d191/pillow-11.2.1-cp313-cp313t-win_amd64.whl", hash = "sha256:36d6b82164c39ce5482f649b437382c0fb2395eabc1e2b1702a6deb8ad647d6e", size = 2681895, upload-time = "2025-04-12T17:49:06.635Z" },
     { url = "https://files.pythonhosted.org/packages/67/32/32dc030cfa91ca0fc52baebbba2e009bb001122a1daa8b6a79ad830b38d3/pillow-11.2.1-cp313-cp313t-win_arm64.whl", hash = "sha256:225c832a13326e34f212d2072982bb1adb210e0cc0b153e688743018c94a2681", size = 2417234, upload-time = "2025-04-12T17:49:08.399Z" },
+]
+
+[[package]]
+name = "prometheus-client"
+version = "0.22.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/5e/cf/40dde0a2be27cc1eb41e333d1a674a74ce8b8b0457269cc640fd42b07cf7/prometheus_client-0.22.1.tar.gz", hash = "sha256:190f1331e783cf21eb60bca559354e0a4d4378facecf78f5428c39b675d20d28", size = 69746, upload-time = "2025-06-02T14:29:01.152Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/32/ae/ec06af4fe3ee72d16973474f122541746196aaa16cea6f66d18b963c6177/prometheus_client-0.22.1-py3-none-any.whl", hash = "sha256:cca895342e308174341b2cbf99a56bef291fbc0ef7b9e5412a0f26d653ba7094", size = 58694, upload-time = "2025-06-02T14:29:00.068Z" },
 ]
 
 [[package]]
